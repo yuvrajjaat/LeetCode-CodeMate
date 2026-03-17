@@ -1,0 +1,29 @@
+# Node
+client/node_modules/
+client/dist/
+
+# Java / Maven
+server/target/
+server/.mvn/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Env / Secrets
+.env
+.env.*
+
+# Logs
+*.log
