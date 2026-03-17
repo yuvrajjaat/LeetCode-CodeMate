@@ -9,19 +9,7 @@ import { useUserContext } from '@/hooks/useUserContext';
 import { MoonLoader } from 'react-spinners';
 import { Link } from 'react-router-dom';
 
-type DataType = {
-    id: number,
-    name: string,
-    city: string,
-    logo?: string,
-    student_count?: number,
-}
-
-type InstituteFormProps = {
-    onInstituteSet?: () => void;
-}
-
-const InstituteForm = ({ onInstituteSet }: InstituteFormProps) => {
+const InstituteForm = ({ onInstituteSet }) => {
     const { user } = useUserContext();
 
     const [value, setValue] = useState('');
@@ -29,8 +17,8 @@ const InstituteForm = ({ onInstituteSet }: InstituteFormProps) => {
     const [notFound, setNotFound] = useState(false);
 
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-    const [institutes, setInstitutes] = useState<DataType[]>([]);
+    const [error, setError] = useState(null);
+    const [institutes, setInstitutes] = useState([]);
 
     useEffect(() => {
         setLoading(true);
@@ -40,12 +28,12 @@ const InstituteForm = ({ onInstituteSet }: InstituteFormProps) => {
             .finally(() => setLoading(false));
     }, []);
 
-    const handleClick = (institute: DataType) => {
+    const handleClick = (institute) => {
         setValue(institute.name);
         setInstituteId(institute.id);
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (instituteId === 0) {
             console.log('please choose your institute');
@@ -100,7 +88,7 @@ const InstituteForm = ({ onInstituteSet }: InstituteFormProps) => {
                         </div>
                     }
                     {institutes
-                        .filter((institute: any) => {
+                        .filter((institute) => {
                             const searchTerm = value.toLowerCase();
                             const inst = institute.name.toLowerCase();
                             if (searchTerm && inst !== searchTerm) {
@@ -108,7 +96,7 @@ const InstituteForm = ({ onInstituteSet }: InstituteFormProps) => {
                             }
                         })
                         .slice(0, 10)
-                        .map((institute: any) =>
+                        .map((institute) =>
                             <div className='bg-lc-gray-1 p-2 rounded flex justify-between gap-2 items-center' key={institute.id} onClick={() => handleClick(institute)}>
                                 <div className="flex justify-start gap-2 items-center">
                                     <div className="">

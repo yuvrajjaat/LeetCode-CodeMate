@@ -1,10 +1,9 @@
 import { UrlReducer } from "@/reducers/UrlReducer";
-import { UrlContextType, UrlContextProviderProps } from "@/types/url";
 import { createContext, useEffect, useReducer } from "react";
 
-export const UrlContext = createContext<UrlContextType | null>(null);
+export const UrlContext = createContext(null);
 
-export const UrlContextProvider = ({ children }: UrlContextProviderProps) => {
+export const UrlContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(UrlReducer, { url: null });
 
     useEffect(() => {

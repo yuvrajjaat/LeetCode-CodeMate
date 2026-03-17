@@ -1,4 +1,4 @@
-export const calcDate = (timestamp: string): string => {
+export const calcDate = (timestamp) => {
     const date1 = new Date(parseInt(timestamp) * 1000);
     const date2 = new Date();
 

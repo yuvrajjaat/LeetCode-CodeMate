@@ -1,10 +1,9 @@
 import { createContext, useReducer, useEffect } from "react";
-import { UserContextType, UserContextProviderProps } from "@/types/user";
 import { UserReducer } from "@/reducers/UserReducer";
 
-export const UserContext = createContext<UserContextType | null>(null);
+export const UserContext = createContext(null);
 
-export const UserContextProvider = ({ children }: UserContextProviderProps) => {
+export const UserContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(UserReducer, { user: null });
 
     useEffect(() => {

@@ -5,21 +5,17 @@ import { BsInfoCircle } from 'react-icons/bs';
 import { IoMdCloseCircle } from 'react-icons/io';
 import { RiUploadCloudFill } from 'react-icons/ri';
 
-type InstituteLogoFormProps = {
-    updateLogoUrl: (url: string) => void;
-};
-
 const CLOUDINARY_UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || '';
 
-const InstituteLogoForm = ({ updateLogoUrl }: InstituteLogoFormProps) => {
-    const [file, setFile] = useState<File | null>(null);
+const InstituteLogoForm = ({ updateLogoUrl }) => {
+    const [file, setFile] = useState(null);
 
-    const handleRemoveImage = (e: React.FormEvent) => {
+    const handleRemoveImage = (e) => {
         e.preventDefault();
         setFile(null);
     };
 
-    const uploadImage = (e: React.FormEvent) => {
+    const uploadImage = (e) => {
         e.preventDefault();
         if (!file) return;
         const formData = new FormData();
@@ -64,7 +60,7 @@ const InstituteLogoForm = ({ updateLogoUrl }: InstituteLogoFormProps) => {
                             type='file'
                             accept='image/*'
                             className='opacity-0 w-1 h-1 absolute'
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setFile(e.target.files?.[0] || null) }}
+                            onChange={(e) => { setFile(e.target.files?.[0] || null) }}
                         />
                     </div>
                 }

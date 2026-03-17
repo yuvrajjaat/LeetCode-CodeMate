@@ -1,6 +1,6 @@
 const API_BASE = 'http://localhost:8080/api';
 
-export const getUserDetail = async (username: string) => {
+export const getUserDetail = async (username) => {
     const res = await fetch(`${API_BASE}/users/${username}`);
     if (!res.ok) {
         const errorText = await res.text();
@@ -9,7 +9,7 @@ export const getUserDetail = async (username: string) => {
     return res.json();
 };
 
-export const createUser = async (username: string) => {
+export const createUser = async (username) => {
     const res = await fetch(`${API_BASE}/users`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -22,7 +22,7 @@ export const createUser = async (username: string) => {
     return res.json();
 };
 
-export const getFriends = async (username: string) => {
+export const getFriends = async (username) => {
     const res = await fetch(`${API_BASE}/friends/${username}`);
     if (!res.ok) {
         const errorText = await res.text();
@@ -31,7 +31,7 @@ export const getFriends = async (username: string) => {
     return res.json();
 };
 
-export const addFriend = async (userUsername: string, friendUsername: string) => {
+export const addFriend = async (userUsername, friendUsername) => {
     const res = await fetch(`${API_BASE}/friends`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -53,7 +53,7 @@ export const getInstitutes = async () => {
     return res.json();
 };
 
-export const getInstitute = async (id: number) => {
+export const getInstitute = async (id) => {
     const res = await fetch(`${API_BASE}/institutes/${id}`);
     if (!res.ok) {
         const errorText = await res.text();
@@ -62,7 +62,7 @@ export const getInstitute = async (id: number) => {
     return res.json();
 };
 
-export const createInstitute = async (username: string, name: string, city: string, logo?: string) => {
+export const createInstitute = async (username, name, city, logo) => {
     const res = await fetch(`${API_BASE}/institutes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -75,7 +75,7 @@ export const createInstitute = async (username: string, name: string, city: stri
     return res.json();
 };
 
-export const setInstitute = async (username: string, instituteId: number) => {
+export const setInstitute = async (username, instituteId) => {
     const res = await fetch(`${API_BASE}/institutes/set`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -88,7 +88,7 @@ export const setInstitute = async (username: string, instituteId: number) => {
     return res.json();
 };
 
-export const getBatchmates = async (username: string) => {
+export const getBatchmates = async (username) => {
     const res = await fetch(`${API_BASE}/institutes/batchmates/${username}`);
     if (!res.ok) {
         const errorText = await res.text();
@@ -97,7 +97,7 @@ export const getBatchmates = async (username: string) => {
     return res.json();
 };
 
-export const removeFriend = async (userUsername: string, friendUsername: string) => {
+export const removeFriend = async (userUsername, friendUsername) => {
     const res = await fetch(`${API_BASE}/friends`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
@@ -110,7 +110,7 @@ export const removeFriend = async (userUsername: string, friendUsername: string)
     return res.json();
 };
 
-export const leaveInstitute = async (username: string) => {
+export const leaveInstitute = async (username) => {
     const res = await fetch(`${API_BASE}/institutes/leave`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -123,7 +123,7 @@ export const leaveInstitute = async (username: string) => {
     return res.json();
 };
 
-export const getAnalytics = async (username: string) => {
+export const getAnalytics = async (username) => {
     const res = await fetch(`${API_BASE}/analytics/${username}`);
     if (!res.ok) {
         const errorText = await res.text();

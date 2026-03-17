@@ -15,9 +15,9 @@ const COLORS = {
 const AnalyticsPage = () => {
     const { user } = useUserContext();
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-    const [analytics, setAnalytics] = useState<any>(null);
-    const [contests, setContests] = useState<any[]>([]);
+    const [error, setError] = useState(null);
+    const [analytics, setAnalytics] = useState(null);
+    const [contests, setContests] = useState([]);
 
     useEffect(() => {
         if (!user) {
@@ -55,24 +55,21 @@ const AnalyticsPage = () => {
         { name: 'Hard', solved: diffData.hard || 0, total: diffData.totalHard || 0 },
     ];
 
-    // Process skill stats for weak topics
     const skillStats = analytics.skillStats?.matchedUser?.tagProblemCounts;
-    const allTopics: { tagName: string; problemsSolved: number; level: string }[] = [];
+    const allTopics = [];
     if (skillStats) {
         ['fundamental', 'intermediate', 'advanced'].forEach((level) => {
             if (skillStats[level]) {
-                skillStats[level].forEach((t: any) => {
+                skillStats[level].forEach((t) => {
                     allTopics.push({ ...t, level });
                 });
             }
         });
     }
-    // Sort by problems solved ascending to find weak topics
     const weakTopics = [...allTopics].sort((a, b) => a.problemsSolved - b.problemsSolved).slice(0, 8);
     const strongTopics = [...allTopics].sort((a, b) => b.problemsSolved - a.problemsSolved).slice(0, 5);
 
-    // Format contest countdown
-    const formatCountdown = (startTime: number) => {
+    const formatCountdown = (startTime) => {
         const now = Math.floor(Date.now() / 1000);
         const diff = startTime - now;
         if (diff <= 0) return 'Started';
@@ -84,19 +81,19 @@ const AnalyticsPage = () => {
         return `${mins}m`;
     };
 
-    const formatContestDate = (startTime: number) => {
+    const formatContestDate = (startTime) => {
         return new Date(startTime * 1000).toLocaleDateString('en-US', {
             weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
         });
     };
 
-    const getScoreColor = (score: number) => {
+    const getScoreColor = (score) => {
         if (score >= 75) return 'text-lc-green';
         if (score >= 50) return 'text-lc-orange';
         return 'text-lc-red';
     };
 
-    const getScoreGradient = (score: number) => {
+    const getScoreGradient = (score) => {
         if (score >= 75) return 'from-lc-green-alt to-lc-green';
         if (score >= 50) return 'from-lc-orange-alt to-lc-orange';
         return 'from-lc-red-alt to-lc-red';
@@ -190,7 +187,7 @@ const AnalyticsPage = () => {
                             <YAxis type="category" dataKey="name" width={55} tick={{ fill: '#bdbfc2', fontSize: 12 }} />
                             <Tooltip
                                 contentStyle={{ backgroundColor: '#282828', border: 'none', borderRadius: '8px', color: '#fff' }}
-                                formatter={(value: number, name: string) => [value, name === 'solved' ? 'Solved' : 'Total']}
+                                formatter={(value, name) => [value, name === 'solved' ? 'Solved' : 'Total']}
                             />
                             <Bar dataKey="total" fill="#3e3e3e" radius={[0, 4, 4, 0]} />
                             <Bar dataKey="solved" fill="#ffa116" radius={[0, 4, 4, 0]} />
@@ -207,7 +204,7 @@ const AnalyticsPage = () => {
                         <p className="text-lc-text-dark text-sm font-medium">Estimated Days to Target</p>
                     </div>
                     <div className="grid grid-cols-3 gap-2">
-                        {Object.entries(analytics.estimatedDaysToTarget).map(([target, days]: [string, any]) => (
+                        {Object.entries(analytics.estimatedDaysToTarget).map(([target, days]) => (
                             <div key={target} className="bg-lc-gray-3 rounded-lg p-3 text-center">
                                 <p className="text-lg font-medium text-lc-text-light">{days}d</p>
                                 <p className="text-xs text-lc-text-dark">to {target}</p>
@@ -293,7 +290,7 @@ const AnalyticsPage = () => {
                     <p className="text-lc-text-dark text-sm">No upcoming contests found</p>
                 ) : (
                     <div className="flex flex-col gap-2">
-                        {contests.map((contest: any) => (
+                        {contests.map((contest) => (
                             <div key={contest.titleSlug} className="flex justify-between items-center bg-lc-gray-3 rounded-lg px-3 py-3">
                                 <div className="flex flex-col">
                                     <p className="text-sm text-lc-text-light">{contest.title}</p>

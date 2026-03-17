@@ -11,8 +11,8 @@ const InstitutePage = () => {
     const { user } = useUserContext();
 
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-    const [data, setData] = useState<any>(null);
+    const [error, setError] = useState(null);
+    const [data, setData] = useState(null);
 
     const fetchData = async () => {
         if (!user) return;
@@ -21,7 +21,7 @@ const InstitutePage = () => {
         try {
             const result = await getUserDetail(user);
             setData(result);
-        } catch (err: any) {
+        } catch (err) {
             setError(err.message);
         } finally {
             setLoading(false);
@@ -37,7 +37,7 @@ const InstitutePage = () => {
         try {
             await leaveInstitute(user);
             fetchData();
-        } catch (err: any) {
+        } catch (err) {
             console.error(err);
         }
     };

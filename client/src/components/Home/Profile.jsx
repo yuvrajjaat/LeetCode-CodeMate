@@ -14,8 +14,8 @@ const Profile = () => {
     const { user, dispatch } = useUserContext();
 
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-    const [data, setData] = useState<any>(null);
+    const [error, setError] = useState(null);
+    const [data, setData] = useState(null);
 
     useEffect(() => {
         chrome.runtime.onMessage.addListener(
@@ -61,7 +61,6 @@ const Profile = () => {
     if (loading) return <MoonLoader color="#ffa116" speedMultiplier={0.8} />;
 
     if (error) {
-        // If user is not found in DB, show onboarding
         return <Onboarding />;
     }
 
@@ -158,7 +157,7 @@ const Profile = () => {
                 </div>
 
                 <div className="flex-col gap-3">
-                    {data.recentAcSubmissionList && data.recentAcSubmissionList.map((problem: any, index: number) => {
+                    {data.recentAcSubmissionList && data.recentAcSubmissionList.map((problem, index) => {
                         return (<button key={problem.id} className={clsx(" flex h-[3.5rem] justify-between items-center p-3 rounded-md w-full",
                             `${index % 2 == 0 && "bg-lc-gray-3"}`)}>
                             <p className='text-lc-text-light'>{problem.title}</p>

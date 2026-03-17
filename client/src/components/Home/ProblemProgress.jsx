@@ -1,13 +1,6 @@
 import clsx from 'clsx';
 
-type Props = {
-    color: string,
-    difficulty: string,
-    solvedQuestions: number,
-    totalQuestions: number
-}
-
-const ProblemProgress = ({ color, difficulty, solvedQuestions, totalQuestions }: Props) => {
+const ProblemProgress = ({ color, difficulty, solvedQuestions, totalQuestions }) => {
     return (
         <div className='flex flex-col w-[12rem] gap-1'>
             <div className="flex w-full items-end text-xs justify-between">

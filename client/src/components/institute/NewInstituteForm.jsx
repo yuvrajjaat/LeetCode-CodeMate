@@ -7,11 +7,6 @@ import { BsInfoCircle } from 'react-icons/bs';
 import { IoIosArrowDropdown } from 'react-icons/io';
 import InstituteLogoForm from './InstituteLogoForm';
 
-interface formDataType {
-    name: string;
-    city: string;
-}
-
 const initValues = {
     name: "",
     city: ""
@@ -29,7 +24,7 @@ const NewInstituteForm = () => {
     const navigate = useNavigate();
     const { user } = useUserContext();
 
-    const [formData, setFormData] = useState<formDataType>(initValues);
+    const [formData, setFormData] = useState(initValues);
     const [showDropDown, setShowDropDown] = useState(false);
     const [loading, setLoading] = useState(false);
     const [logoUrl, setLogoUrl] = useState("");
@@ -40,17 +35,17 @@ const NewInstituteForm = () => {
         }
     }, [formData]);
 
-    const handleClick = (item: any) => {
+    const handleClick = (item) => {
         setFormData({ name: formData.name, city: item.city });
         setShowDropDown(false);
     };
 
-    const handleChange = (e: any) => {
+    const handleChange = (e) => {
         setFormData({ city: e.target.value, name: formData.name });
         if (formData.city) setShowDropDown(true);
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!user) return;
         setLoading(true);
@@ -65,7 +60,7 @@ const NewInstituteForm = () => {
         }
     };
 
-    const updateLogoUrl = (url: string) => {
+    const updateLogoUrl = (url) => {
         setLogoUrl(url);
     };
 
@@ -111,7 +106,7 @@ const NewInstituteForm = () => {
                 </div>
                 <div className="flex flex-col gap-1 mt-2 rounded absolute">
                     {cityData
-                        .filter((item: any) => {
+                        .filter((item) => {
                             const searchTerm = formData.city.toLowerCase();
                             const city = item.city.toLowerCase();
                             if (showDropDown) {
@@ -119,7 +114,7 @@ const NewInstituteForm = () => {
                             }
                         })
                         .slice(0, 10)
-                        .map((item: any) =>
+                        .map((item) =>
                             <div className='bg-lc-gray-1 p-2 rounded flex justify-between gap-2 items-center' key={item.city} onClick={() => handleClick(item)}>
                                 {item.city}, {item.state}
                             </div>

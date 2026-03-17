@@ -4,12 +4,7 @@ import { FaUserGraduate } from 'react-icons/fa';
 import { BsInfoCircle } from 'react-icons/bs';
 import { IoExitOutline } from 'react-icons/io5';
 
-type InstituteDetailProps = {
-    userData: any;
-    onLeave?: () => void;
-};
-
-const InstituteDetail = ({ userData, onLeave }: InstituteDetailProps) => {
+const InstituteDetail = ({ userData, onLeave }) => {
     if (!userData?.institute) return null;
 
     return (

@@ -1,6 +1,4 @@
-import { UrlAction, UrlState } from "@/types/url";
-
-export const UrlReducer = (state: UrlState, action: UrlAction): UrlState => {
+export const UrlReducer = (state, action) => {
     switch (action.type) {
         case "VISIT":
             return {

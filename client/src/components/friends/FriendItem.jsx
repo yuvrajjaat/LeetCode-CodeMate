@@ -1,23 +1,18 @@
-import { FriendItemProps } from '@/types/friend';
 import { IoClose } from 'react-icons/io5';
 
-type ExtendedFriendItemProps = FriendItemProps & {
-    onRemove?: (username: string) => void;
-};
-
-const getScoreColor = (score: number) => {
+const getScoreColor = (score) => {
     if (score >= 75) return 'text-lc-green';
     if (score >= 50) return 'text-lc-orange';
     return 'text-lc-red';
 };
 
-const getScoreBg = (score: number) => {
+const getScoreBg = (score) => {
     if (score >= 75) return 'bg-lc-green-alt';
     if (score >= 50) return 'bg-lc-orange-alt';
     return 'bg-lc-red-alt';
 };
 
-const FriendItem = ({ username, realName, rating, ranking, acSubmissionNum, allQuestionsCount, userAvatar, codeMateScore, onRemove }: ExtendedFriendItemProps) => {
+const FriendItem = ({ username, realName, rating, ranking, acSubmissionNum, allQuestionsCount, userAvatar, codeMateScore, onRemove }) => {
     return (
         <div className='flex gap-2 bg-lc-gray-1 rounded-lg w-full justify-between items-center p-4'>
             <div className="flex gap-2 items-center hover:cursor-pointer" onClick={() => chrome.tabs.create({ 'url': `https://leetcode.com/${username}` })}>
@@ -28,7 +23,6 @@ const FriendItem = ({ username, realName, rating, ranking, acSubmissionNum, allQ
                 </div>
             </div>
             <div className="flex items-center gap-3">
-                {/* CodeMate Score */}
                 {codeMateScore !== undefined && (
                     <div className={`flex flex-col items-center justify-center w-[45px] h-[45px] rounded-full ${getScoreBg(codeMateScore)}`}>
                         <p className={`text-sm font-bold ${getScoreColor(codeMateScore)}`}>{codeMateScore}</p>

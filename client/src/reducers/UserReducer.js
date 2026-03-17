@@ -1,6 +1,4 @@
-import { UserState, UserAction } from "@/types/user";
-
-export const UserReducer = (state: UserState, action: UserAction): UserState => {
+export const UserReducer = (state, action) => {
     switch (action.type) {
         case "LOGIN":
             return {

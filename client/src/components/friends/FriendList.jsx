@@ -4,7 +4,6 @@ import { getFriends, addFriend as addFriendApi, removeFriend as removeFriendApi 
 import { TiUserAdd } from 'react-icons/ti';
 import { useState, useEffect } from 'react';
 import { MoonLoader } from 'react-spinners';
-import { UserType } from '@/types/user';
 
 const FriendList = () => {
     const [friendUsername, setFriendUsername] = useState('');
@@ -12,8 +11,8 @@ const FriendList = () => {
     const { user } = useUserContext();
 
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-    const [data, setData] = useState<any[]>([]);
+    const [error, setError] = useState(null);
+    const [data, setData] = useState([]);
 
     const fetchFriends = async () => {
         if (!user) return;
@@ -22,7 +21,7 @@ const FriendList = () => {
         try {
             const result = await getFriends(user);
             setData(result);
-        } catch (err: any) {
+        } catch (err) {
             setError(err.message);
         } finally {
             setLoading(false);
@@ -38,29 +37,29 @@ const FriendList = () => {
     if (loading) return <MoonLoader color="#ffa116" speedMultiplier={0.8} />;
     if (error) return <p>{error}</p>;
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!user || !friendUsername) return;
         try {
             await addFriendApi(user, friendUsername);
             setFriendUsername('');
             fetchFriends();
-        } catch (err: any) {
+        } catch (err) {
             console.error(err);
         }
     };
 
-    const handleRemoveFriend = async (friendToRemove: string) => {
+    const handleRemoveFriend = async (friendToRemove) => {
         if (!user) return;
         try {
             await removeFriendApi(user, friendToRemove);
             fetchFriends();
-        } catch (err: any) {
+        } catch (err) {
             console.error(err);
         }
     };
 
-    const sortList = (a: any, b: any) => {
+    const sortList = (a, b) => {
         if (sortBy == "1")
             return b.acSubmissionNum[0].count - a.acSubmissionNum[0].count;
         else if (sortBy == "2")
@@ -112,9 +111,9 @@ const FriendList = () => {
             </div>
             <div className="flex flex-col gap-2 w-full mt-4">
                 {
-                    ([] as any[]).concat(data)
+                    [].concat(data)
                         .sort(sortList)
-                        .map((friend: any) => {
+                        .map((friend) => {
                             return <FriendItem
                                 key={friend.username}
                                 username={friend.username}

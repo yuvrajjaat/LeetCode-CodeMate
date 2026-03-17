@@ -3,15 +3,14 @@ import { getBatchmates } from '@/api/api';
 import { useState, useEffect } from 'react';
 import FriendItem from '../friends/FriendItem';
 import { MoonLoader } from 'react-spinners';
-import { UserType } from '@/types/user';
 
 const BatchmatesList = () => {
     const { user } = useUserContext();
     const [sortBy, setSortBy] = useState("");
 
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-    const [data, setData] = useState<any[]>([]);
+    const [error, setError] = useState(null);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         if (!user) return;
@@ -23,7 +22,7 @@ const BatchmatesList = () => {
             .finally(() => setLoading(false));
     }, [user]);
 
-    const sortList = (a: UserType, b: UserType) => {
+    const sortList = (a, b) => {
         if (sortBy == "1")
             return b.acSubmissionNum[0].count - a.acSubmissionNum[0].count;
         else if (sortBy == "2")
@@ -51,8 +50,8 @@ const BatchmatesList = () => {
                 <option value="3">Sort Alphabetically</option>
             </select>
             <div className="flex flex-col gap-2 w-full mt-4">
-                {([] as any[]).concat(data)
-                    .sort(sortList).map((friend: any) => {
+                {[].concat(data)
+                    .sort(sortList).map((friend) => {
                         return <FriendItem
                             key={friend.username}
                             username={friend.username}

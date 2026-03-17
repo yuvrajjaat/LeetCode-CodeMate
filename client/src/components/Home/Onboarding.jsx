@@ -1,5 +1,5 @@
 import { useUserContext } from '@/hooks/useUserContext';
-import { createUser, getUserDetail } from '@/api/api';
+import { createUser } from '@/api/api';
 import { useState } from 'react';
 
 const Onboarding = () => {
@@ -11,7 +11,6 @@ const Onboarding = () => {
         setLoading(true);
         try {
             await createUser(user);
-            // After creating user, reload the page to refetch data
             window.location.reload();
         } catch (err) {
             console.error(err);
