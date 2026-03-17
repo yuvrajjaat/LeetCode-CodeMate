@@ -5,7 +5,7 @@ A Chrome Extension + Spring Boot application that enhances your LeetCode experie
 ![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-green?logo=googlechrome)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.4-brightgreen?logo=springboot)
 ![React](https://img.shields.io/badge/React-18.2-blue?logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue?logo=typescript)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES2020-F7DF1E?logo=javascript)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-06B6D4?logo=tailwindcss)
 
 ## Screenshots
@@ -62,7 +62,7 @@ A Chrome Extension + Spring Boot application that enhances your LeetCode experie
 
 | Layer | Technology |
 |-------|-----------|
-| Frontend | React 18, TypeScript, TailwindCSS, Vite |
+| Frontend | React 18, JavaScript (ES2020), TailwindCSS, Vite |
 | Backend | Spring Boot 3.2.4, Java 17, Spring Data JPA |
 | Database | MySQL 8 |
 | Charts | Recharts |
@@ -101,16 +101,33 @@ spring.datasource.username=your_username
 spring.datasource.password=your_password
 ```
 
-### 3. Run the Server
+### 3. Run the Backend
 
 ```bash
 cd server
 ./mvnw spring-boot:run
 ```
 
+On Windows:
+
+```bash
+cd server
+mvnw.cmd spring-boot:run
+```
+
 The server will start on `http://localhost:8080`.
 
-### 4. Build the Client
+### 4. Run the Frontend (Development)
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+The dev server will start on `http://localhost:5173`.
+
+### 5. Build the Client for Chrome Extension
 
 ```bash
 cd client
@@ -118,7 +135,7 @@ npm install
 npm run build
 ```
 
-### 5. Load the Chrome Extension
+### 6. Load the Chrome Extension
 
 1. Open Chrome and go to `chrome://extensions`
 2. Enable **Developer mode** (top right toggle)
@@ -162,28 +179,28 @@ npm run build
 
 ```
 LeetCode-CodeMate/
-├── client/                     # Chrome Extension (React + TypeScript)
+├── client/                     # Chrome Extension (React + JavaScript)
 │   ├── public/
 │   │   ├── manifest.json       # Chrome Extension manifest (V3)
 │   │   ├── content.js          # Content script for LeetCode pages
 │   │   └── images/             # Extension icons
 │   ├── src/
-│   │   ├── api/api.ts          # API client functions
+│   │   ├── api/api.js          # API client functions
 │   │   ├── components/         # React components
 │   │   │   ├── Home/           # Profile, Onboarding
 │   │   │   ├── friends/        # FriendList, FriendItem
 │   │   │   ├── institute/      # Institute management
 │   │   │   ├── analytics/      # Analytics dashboard
-│   │   │   └── common/         # Appbar, shared components
+│   │   │   └── common/         # Appbar, Navbar
 │   │   ├── contexts/           # React contexts (User, URL)
 │   │   ├── hooks/              # Custom hooks
+│   │   ├── layouts/            # Layout components
 │   │   ├── pages/              # Route pages
 │   │   ├── reducers/           # State reducers
-│   │   └── types/              # TypeScript type definitions
+│   │   └── utility/            # Utility functions
 │   ├── package.json
-│   ├── vite.config.ts
-│   ├── tailwind.config.js
-│   └── tsconfig.json
+│   ├── vite.config.js
+│   └── tailwind.config.js
 │
 └── server/                     # Spring Boot Backend
     ├── src/main/java/com/leetcodemate/
